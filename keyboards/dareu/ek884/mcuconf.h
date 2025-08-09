@@ -1,0 +1,12 @@
+#ifndef MCUCONF_H
+#define MCUCONF_H
+
+#define SN32F24xB_MCUCONF
+#define PLATFORM_MCUCONF
+
+#undef SN32_PWM_USE_CT16B1
+#define SN32_PWM_USE_CT16B1 TRUE
+#undef SN32_PWM_NO_RESET
+#define SN32_PWM_NO_RESET TRUE
+
+#endif

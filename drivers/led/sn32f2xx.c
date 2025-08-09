@@ -85,7 +85,9 @@ static uint8_t led_duty_cycle[SN32F2XX_RGB_MATRIX_ROWS_HW] = {0}; // track the c
 #    endif
 #endif
 #if (DIODE_DIRECTION == ROW2COL)
+#if (SN32F2XX_PWM_DIRECTION == ROW2COL)
 static matrix_row_t row_shifter = MATRIX_ROW_SHIFTER;
+#endif
 #endif
 #if defined(SHARED_MATRIX)
 extern matrix_row_t  raw_matrix[MATRIX_ROWS];    // raw values
