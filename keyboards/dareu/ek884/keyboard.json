@@ -4,7 +4,7 @@
     "maintainer": "KhanhhNe",
     "diode_direction": "ROW2COL",
     "features": {
-        "rgb_matrix": true,
+        "rgb_matrix": false,
         "bootmagic": true,
         "extrakey": true,
         "nkro": true,
@@ -121,7 +121,8 @@
         "max_brightness": 150,
         "default": {
             "animation": "solid_color",
-            "hue": 100
+            "hue": 100,
+            "val": 0
         },
         "animations": {
             "alphas_mods" : true,

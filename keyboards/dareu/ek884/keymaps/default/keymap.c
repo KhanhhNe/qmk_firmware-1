@@ -11,7 +11,8 @@
 // and just use numbers.
 enum layer_names {
     BASE_LAYER = 0, // Base layer
-    FN = 1, // Function layer
+    WIN = 1, // Window layer
+    FN = 2, // Function layer
     SUP = 3, // Super layer
 };
 
@@ -42,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
      */
     [SUP] = LAYOUT_75_ansi(
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXX,
+        QK_BOOT, TG(WIN), XXXXXXX, XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXX,
         XXXXXX,  XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXX,  XXXXXXX,          XXXXXXX,
         XXXXXX,  XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXXX,          XXXXXX,           XXXXXXX,
@@ -72,6 +73,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,          XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXX,  XXXXXXX,          XXXXXXX, XXXXX,   XXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXX,                             XXXXXXX, XXXXXXX, MO(SUP), XXXXXXX, XXXXXXX, XXXXXXX
     ),
+    /*
+     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+     * │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┴───┼───┤
+     * │   │   │   │   │   │   │   │   │   │   │   │   │   │       │   │
+     * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┼───┤
+     * │     │   │   │   │   │   │   │   │   │   │   │   │   │     │   │
+     * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┼───┤
+     * │      │   │   │   │   │   │   │   │   │   │   │   │        │   │
+     * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┼───┤
+     * │        │   │   │   │   │   │   │   │   │   │   │      │   │   |
+     * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴──┬┴──┬┴──┬───┼───┼───┤
+     * │    |GUI |Alt │                        │   │   │   │   │   │   │
+     * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
+     */
+    [WIN] = LAYOUT_75_ansi(
+        ______,  _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,
+        ______,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, ______,  _______,          _______,
+        ______,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______, _______,          _______,
+        _______, ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______,          ______,           _______,
+        _______,          ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, ______,  _______,          _______, _____,   ______,
+        _______, KC_LGUI, KC_LALT,                            ______,                             _______, _______, _______, _______, _______, _______
+    ),
      /*
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
      * │Esc│F1 │F2 │F3 │F4 │F5 │F6 │F7 │F8 │F9 │F10│F11│F12│PSc│Pse│Del│
@@ -84,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┼───┤
      * │ Shift  │ Z │ X │ C │ V │ B │ N │ M │ , │ . │ / │ Shift│ ↑ │End│
      * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴──┬┴──┬┴──┬───┼───┼───┤
-     * │Ctrl│GUI │Alt │                        │Alt│Fn │Ctl│ ← │ ↓ │ → │
+     * │Ctrl│Alt │GUI │                        │Alt│Fn │Ctl│ ← │ ↓ │ → │
      * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
      */
     [BASE_LAYER] = LAYOUT_75_ansi(
@@ -97,6 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+#ifdef RGB_MATRIX_ENABLE
 // layer_state_t layer_state_set_user(layer_state_t state) {
 //     switch (get_highest_layer(state)) {
 //         case BASE_LAYER:
@@ -115,10 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     return state;
 // }
 
-bool rgb_matrix_indicators_kb(void) {
-    if (!rgb_matrix_indicators_user()) {
-        return false;
-    }
+bool rgb_matrix_indicators_user(void) {
     // sn32f2xx_set_color(1, RGB_CYAN);
     // sn32f2xx_set_color(2, RGB_CYAN);
     // sn32f2xx_set_color(7, RGB_CYAN);
@@ -128,7 +150,9 @@ bool rgb_matrix_indicators_kb(void) {
     // sn32f2xx_set_color(11, RGB_CYAN);
     // sn32f2xx_set_color(12, RGB_CYAN);
     
-    // sn32f2xx_set_color(0, RGB_RED);
+    rgb_matrix_set_color(0, 0, 255, 0);
+    rgb_matrix_set_color(20, 255, 0, 0);
+    // rgb_matrix_set_color(1, RGB_YELLOW);
     // sn32f2xx_set_color(16, RGB_RED);
     // sn32f2xx_set_color(31, RGB_RED);
     // sn32f2xx_set_color(46, RGB_RED);
@@ -137,6 +161,7 @@ bool rgb_matrix_indicators_kb(void) {
 
     return true;
 }
+#endif
 
 void keyboard_post_init_user(void) {
     // Customise these values to desired behaviour
