@@ -11,9 +11,10 @@
 // and just use numbers.
 enum layer_names {
     BASE_LAYER = 0, // Base layer
-    WIN = 1, // Window layer
-    FN = 2, // Function layer
-    SUP = 3, // Super layer
+    WIN        = 1, // Window layer
+    FN         = 2, // Function layer
+    SUP        = 3, // Super layer
+    VIM        = 4, // Vim layer
 };
 
 #define ____ KC_TRNS
@@ -29,7 +30,7 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │BLD|   |   |   │   │   │   │   |   |   |   |   |   │   │   │   │
+     * │BLD|WIN|VIM|   │   │   │   │   |   |   |   |   |   │   │   │   │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┴───┼───┤
      * │   │   │   │   │   │   │   │   │   │   │   │   │   │       │   │
      * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┼───┤
@@ -43,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
      */
     [SUP] = LAYOUT_75_ansi(
-        QK_BOOT, TG(WIN), XXXXXXX, XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXX,
+        QK_BOOT, TG(WIN), TG(VIM), XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXX,
         XXXXXX,  XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXX,  XXXXXXX,          XXXXXXX,
         XXXXXX,  XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXXX,          XXXXXX,           XXXXXXX,
@@ -72,6 +73,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXXX,          XXXXXX,           XXXXXXX,
         XXXXXXX,          XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXXXXX, XXXXXX,  XXXXXXX,          XXXXXXX, XXXXX,   XXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXX,                             XXXXXXX, XXXXXXX, MO(SUP), XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+    /*
+     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+     * │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┴───┼───┤
+     * │   │   │   │   │   │   │   │   │   │   │   │   │   │       │   │
+     * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┼───┤
+     * │     │   │   │   │   │   │   │   │   │   │   │   │   │     │   │
+     * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┼───┤
+     * │ESC   │   │   │   │   │   │   │   │   │   │   │   │        │   │
+     * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┼───┤
+     * │        │   │   │   │   │   │   │   │   │   │   │      │   │   |
+     * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴──┬┴──┬┴──┬───┼───┼───┤
+     * │    |    |    │                        │   │   │   │   │   │   │
+     * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
+     */
+    [VIM] = LAYOUT_75_ansi(
+        ______,  _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,   _____,
+        ______,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, ______,  _______,          _______,
+        ______,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______, _______,          _______,
+        KC_ESC,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______,          ______,           _______,
+        _______,          ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, ______,  _______,          _______, _____,   ______,
+        _______, _______, _______,                            ______,                             _______, _______, _______, _______, _______, _______
     ),
     /*
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
@@ -149,7 +173,7 @@ bool rgb_matrix_indicators_user(void) {
     // sn32f2xx_set_color(10, RGB_CYAN);
     // sn32f2xx_set_color(11, RGB_CYAN);
     // sn32f2xx_set_color(12, RGB_CYAN);
-    
+
     rgb_matrix_set_color(0, 0, 255, 0);
     rgb_matrix_set_color(20, 255, 0, 0);
     // rgb_matrix_set_color(1, RGB_YELLOW);
@@ -163,9 +187,47 @@ bool rgb_matrix_indicators_user(void) {
 }
 #endif
 
+typedef union {
+    uint32_t raw;
+    struct {
+        bool vim_mode : 1;
+        bool win_mode : 1;
+    };
+} user_config_t;
+
+user_config_t user_config;
+
 void keyboard_post_init_user(void) {
     // Customise these values to desired behaviour
-    debug_enable=true;
-    debug_matrix=true;
-    // debug_keyboard=true;
+    debug_enable   = true;
+    debug_matrix   = true;
+    debug_keyboard = true;
+
+    user_config.raw = eeconfig_read_user();
+    
+    if (user_config.vim_mode) {
+        layer_on(VIM);
+    }
+    if (user_config.win_mode) {
+        layer_on(WIN);
+    }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TG(WIN):
+            if (record->event.pressed) {
+                user_config.win_mode ^= 1;
+                eeconfig_update_user(user_config.raw);
+            }
+            return true;
+        case TG(VIM):
+            if (record->event.pressed) {
+                user_config.vim_mode ^= 1;
+                eeconfig_update_user(user_config.raw);
+            }
+            return true;
+        default:
+            return true;
+    }
 }
