@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┼───┤
      * │        │   │   │   │   │   │   │   │   │   │   │      │   │   |
      * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴──┬┴──┬┴──┬───┼───┼───┤
-     * │    |GUI |Alt │                        │   │   │   │   │   │   │
+     * │    |GUI |Alt │                        │Alt│   │   │   │   │   │
      * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
      */
     [WIN] = LAYOUT_75_ansi(
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ______,  ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______, _______,          _______,
         _______, ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, _______,          ______,           _______,
         _______,          ____,    ____,    ____,    ____,    ____,    ____,    ____,    _______, ______,  _______,          _______, _____,   ______,
-        _______, KC_LGUI, KC_LALT,                            ______,                             _______, _______, _______, _______, _______, _______
+        _______, KC_LGUI, KC_LALT,                            ______,                             KC_RALT, _______, _______, _______, _______, _______
     ),
      /*
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
@@ -174,14 +174,17 @@ bool rgb_matrix_indicators_user(void) {
     // sn32f2xx_set_color(11, RGB_CYAN);
     // sn32f2xx_set_color(12, RGB_CYAN);
 
-    rgb_matrix_set_color(0, 0, 255, 0);
-    rgb_matrix_set_color(20, 255, 0, 0);
-    // rgb_matrix_set_color(1, RGB_YELLOW);
-    // sn32f2xx_set_color(16, RGB_RED);
-    // sn32f2xx_set_color(31, RGB_RED);
-    // sn32f2xx_set_color(46, RGB_RED);
-    // sn32f2xx_set_color(60, RGB_RED);
-    // sn32f2xx_set_color(74, RGB_RED);
+    // rgb_matrix_set_color(0, 0, 255, 0);
+    // rgb_matrix_set_color(1, 0, 0, 255);
+    // rgb_matrix_set_color(20, 255, 0, 0);
+    // rgb_matrix_set_color(60, 255, 0, 0);
+    // rgb_matrix_set_color(61, 0, 255, 0);
+
+    sn32f2xx_set_color(0, 0, 255, 0);
+    sn32f2xx_set_color(1, 0, 0, 255);
+    sn32f2xx_set_color(20, 255, 0, 0);
+    sn32f2xx_set_color(60, 255, 0, 0);
+    sn32f2xx_set_color(61, 0, 255, 0);
 
     return true;
 }
@@ -211,6 +214,16 @@ void keyboard_post_init_user(void) {
     if (user_config.win_mode) {
         layer_on(WIN);
     }
+}
+
+void eeconfig_init_user(void) {  // EEPROM is getting reset!
+    user_config.raw = 0;
+    user_config.vim_mode = true;
+    user_config.win_mode = true;
+    eeconfig_update_user(user_config.raw);
+    
+    layer_on(VIM);
+    layer_on(WIN);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
